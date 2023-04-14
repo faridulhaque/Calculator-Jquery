@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  let result = false;
 
   const handleValue = (value) => {
     if (value === "AC") {
@@ -10,6 +11,8 @@ $(document).ready(function () {
     }
     else if (value === "=") {
       showResult();
+      result = true;
+
     }
     else {
       getValue(value);
@@ -17,9 +20,35 @@ $(document).ready(function () {
   }
 
   const getValue = (value) => {
-    $("#screen input").val(function (index, currentValue) {
-      return currentValue + value;
-    });
+    console.log(result)
+    if (result) {
+      if (value === "+" || value === "-" || value === "*" || value === "/") {
+        $("#screen input").val(function (index, currentValue) {
+          return currentValue + value;
+        });
+      }
+
+      else if (value === "=") {
+        $("#screen input").val("");
+      }
+
+      else {
+        $("#screen input").val("");
+        $("#screen input").val(function (index, currentValue) {
+          return currentValue + value;
+        });
+      }
+
+      result = false;
+
+    }
+
+
+    else {
+      $("#screen input").val(function (index, currentValue) {
+        return currentValue + value;
+      });
+    }
   };
 
 
@@ -31,8 +60,8 @@ $(document).ready(function () {
 
   const showResult = () => {
     let currentValue = $("#screen input").val()
-      let finalValue = eval(currentValue)
-      $("#screen input").val(finalValue.toString());
+    let finalValue = eval(currentValue)
+    $("#screen input").val(finalValue.toString());
   }
 
 
