@@ -1,5 +1,8 @@
 $(document).ready(function () {
+
   let result = false;
+
+
 
   const handleValue = (value) => {
     if (value === "AC") {
@@ -20,11 +23,13 @@ $(document).ready(function () {
   }
 
   const getValue = (value) => {
-    console.log(result)
+
+
     if (result) {
       if (value === "+" || value === "-" || value === "*" || value === "/") {
         $("#screen input").val(function (index, currentValue) {
           return currentValue + value;
+
         });
       }
 
@@ -46,9 +51,19 @@ $(document).ready(function () {
 
     else {
       $("#screen input").val(function (index, currentValue) {
+        if (currentValue === "") {
+          if (value === ")" || value ==="/" || value ==="*") {
+            return currentValue;
+          }
+
+        }
+
         return currentValue + value;
+
       });
     }
+
+
   };
 
 
