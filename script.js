@@ -7,6 +7,7 @@ $(document).ready(function () {
   const handleValue = (value) => {
     if (value === "AC") {
       $("#screen input").val("")
+
     }
     else if (value === "DEL") {
       removeValue()
@@ -31,6 +32,7 @@ $(document).ready(function () {
           return currentValue + value;
 
         });
+
       }
 
       else if (value === "=") {
@@ -52,11 +54,12 @@ $(document).ready(function () {
     else {
       $("#screen input").val(function (index, currentValue) {
         if (currentValue === "") {
-          if (value === ")" || value ==="/" || value ==="*") {
+          if (value === ")" || value === "/" || value === "*") {
             return currentValue;
           }
 
         }
+
 
         return currentValue + value;
 
@@ -75,8 +78,17 @@ $(document).ready(function () {
 
   const showResult = () => {
     let currentValue = $("#screen input").val()
-    let finalValue = eval(currentValue)
-    $("#screen input").val(finalValue.toString());
+
+    try {
+      let finalValue = eval(currentValue)
+
+      return $("#screen input").val(finalValue.toString());
+
+
+    } catch (error) {
+      $("#screen input").val("Invalid Input!");
+
+    }
   }
 
 
@@ -84,7 +96,6 @@ $(document).ready(function () {
     "AC", "DEL", "(", ")", "7", "8", "9", "/", "4", "5", "6", "*", "1", "2", "3", "-", "0", ".", "=", "+",
   ];
 
-  let myValue;
 
   $.each(buttons, function (index, value) {
 
